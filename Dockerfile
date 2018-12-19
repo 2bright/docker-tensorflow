@@ -27,11 +27,26 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -yq tzdata
 RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 RUN dpkg-reconfigure -f noninteractive tzdata
 
-RUN apt-get install -y python3-dev python3-pip
+RUN apt-get install -y apt-utils software-properties-common
+
+RUN add-apt-repository ppa:deadsnakes/ppa
+RUN apt-get update
+RUN ssctl start && http_proxy=http://127.0.0.1:8123 https_proxy=https://127.0.0.1:8123 apt-get install -y python3.6 && ssctl stop
+RUN curl https://bootstrap.pypa.io/ez_setup.py -o - | python3.6 && python3.6 -m easy_install pip
+
 COPY pip.conf /root/.pip/pip.conf
 
 RUN pip3 install --upgrade pip
 RUN pip3 install h5py pyyaml matplotlib sklearn six numpy wheel mock
 RUN pip3 install tensorflow tensorflow_hub
+RUN pip3 install Pillow Image
+
+RUN apt-get install -y vim
+
+RUN pip3 install keras pydot ipython
+RUN pip3 install graphviz pydot-ng
+
+RUN apt-get install -y graphviz
+RUN pip3 install opencv-python pandas
 
 WORKDIR /learning/projects

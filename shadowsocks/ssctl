@@ -3,9 +3,7 @@
 if [ "$1" == "start" ]; then
     sslocal -c /etc/shadowsocks/config.json &
     service polipo start
-    http_proxy_on
 elif [ "$1" == "stop" ]; then
-    http_proxy_off
     service polipo stop
     kill $(ps aux | grep 'sslocal' | grep -v grep | awk '{print $2}')
 fi
