@@ -50,4 +50,9 @@ RUN pip3 install graphviz pydot-ng
 RUN apt-get install -y graphviz
 RUN pip3 install opencv-python pandas
 
+RUN apt-get install -y iputils-ping
+
+RUN pip3 install music21
+RUN pip3 install emoji
+
 WORKDIR /learning/projects
