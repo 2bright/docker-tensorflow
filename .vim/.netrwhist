@@ -1,0 +1,5 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =3
+let g:netrw_dirhist_1='/home/lwj/learning/tensorflow/tensorflow/tools/dockerfiles'
+let g:netrw_dirhist_2='/learning/projects/adapow2/examples/mnist/datasets'
+let g:netrw_dirhist_3='/learning/projects/adapow2/adapow2/x/__pycache__'

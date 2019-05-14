@@ -7,4 +7,8 @@ services:
             - 6006:6006
         volumes:
             - ./:/learning
-        command: bash -c "while [ 1 ]; do sleep 1; done"
+            - ./.vimrc:/root/.vimrc
+            - ./.vim:/root/.vim
+        env_file:
+            - ./.env
+        command: /learning/enter-point.sh

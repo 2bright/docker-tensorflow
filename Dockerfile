@@ -48,5 +48,19 @@ RUN pip3 install graphviz pydot-ng
 
 RUN apt-get install -y graphviz
 RUN pip3 install opencv-python pandas
+RUN pip3 install jieba
+
+RUN echo "alias py='python3.6'" >> /root/.bashrc
+
+RUN curl -O https://nodejs.org/dist/v10.15.3/node-v10.15.3-linux-x64.tar.xz && \
+      tar -xf node-v10.15.3-linux-x64.tar.xz && \
+      mv node-v10.15.3-linux-x64 /usr/local/node && \
+      rm node-v10.15.3-linux-x64.tar.xz
+ENV PATH "$PATH:/usr/local/node/bin"
+
+RUN npm install -g cnpm --registry=https://registry.npm.taobao.org
+RUN npm config set registry https://registry.npm.taobao.org
+
+RUN pip3 install pytest
 
 WORKDIR /learning/projects
