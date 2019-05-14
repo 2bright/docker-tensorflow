@@ -32,7 +32,8 @@ RUN apt-get install -y apt-utils software-properties-common
 RUN add-apt-repository ppa:deadsnakes/ppa
 RUN apt-get update
 RUN ssctl start && http_proxy=http://127.0.0.1:8123 https_proxy=https://127.0.0.1:8123 apt-get install -y python3.6 && ssctl stop
-RUN curl https://bootstrap.pypa.io/ez_setup.py -o - | python3.6 && python3.6 -m easy_install pip
+RUN curl https://bootstrap.pypa.io/ez_setup.py -o /tmp/ez_setup.py
+RUN ssctl start && http_proxy=http://127.0.0.1:8123 https_proxy=https://127.0.0.1:8123 python3.6 /tmp/ez_setup.py && python3.6 -m easy_install pip && ssctl stop
 
 COPY pip.conf /root/.pip/pip.conf
 
@@ -62,5 +63,10 @@ RUN npm install -g cnpm --registry=https://registry.npm.taobao.org
 RUN npm config set registry https://registry.npm.taobao.org
 
 RUN pip3 install pytest
+
+RUN apt-get install -y iputils-ping
+
+RUN pip3 install music21
+RUN pip3 install emoji
 
 WORKDIR /learning/projects
